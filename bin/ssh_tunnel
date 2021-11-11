@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+set -eufx -o pipefail
+
+SSH_USER=${SSH_USER:-ubuntu} && \
+SSH_HOST=${SSH_HOST:-google.com} && \
+BIND_LOCAL=${BIND_LOCAL:-localhost} && \
+LOCAL_PORT=${LOCAL_PORT:-8888} && \
+BIND_REMOTE=${BIND_REMOTE:-localhost} && \
+REMOTE_PORT=${REMOTE_PORT:-8888} && \
+    ssh -N -L ${BIND_LOCAL}:${LOCAL_PORT}:${BIND_REMOTE}:${REMOTE_PORT} ${SSH_USER}@${SSH_HOST} -vvv
