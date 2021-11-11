@@ -1,0 +1,23 @@
+PS1="$(echo $PS1 | sed 's/\\\$//')\n$ "
+
+init_flag=
+command1()
+{
+    if [ "$BASH_COMMAND" != command2 ]
+    then
+        command_flag=1
+    fi
+    return 0
+}
+trap command1 debug
+command2()
+{
+    if [ "$command_flag" ] && [ "$init_flag" ]
+    then
+        echo ""
+    fi
+    command_flag=
+    init_flag=1
+}
+PROMPT_COMMAND=command2
+PROMPT_DIRTRIM=10
